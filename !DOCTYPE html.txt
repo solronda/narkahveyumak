@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çocuk Edebiyatı Bibliyografya</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #333;
+        }
+        header {
+            background-color: #007BFF;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+        }
+        main {
+            padding: 20px;
+        }
+        footer {
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #searchResults {
+            display: none;
+        }
+    </style>
+    <script>
+        const books = [
+            { title: "Pollyanna", authors: "E.H. Porter; N. / A", keywords: "Amerikan Edebiyatı; Pollyanna; Porter, Eleanor H.; Roman", publisher: "Ata Yayıncılık", year: "2012", type: "Book" },
+            { title: "Pollyanna", authors: "E.H. Porter; N. / A", keywords: "Amerikan Edebiyatı; Pollyanna; Porter, Eleanor H.; Roman", publisher: "Karanfil Yayınları", year: "2012", type: "Book" },
+            { title: "Pollyanna", authors: "E.H. Porter; Ü. Tamer", keywords: "Amerikan Edebiyatı; Pollyanna; Porter, Eleanor H.; Roman", publisher: "Yapı Kredi Kültür Sanat Yayıncılık", year: "2012", type: "Book" },
+            { title: "Pollyanna", authors: "E.H. Porter; N. / A", keywords: "Amerikan Edebiyatı; Pollyanna; Porter, Eleanor H.; Roman", publisher: "Evrensel İletişim Yayınları", year: "2012", type: "Book" },
+            { title: "Pollyanna", authors: "E.H. Porter; G. Çil", keywords: "Amerikan Edebiyatı; Gökçe Çil; Pollyanna; Porter, Eleanor H.; Roman", publisher: "Nurdan Yayınları", year: "2012", type: "Book" },
+            { title: "Pollyanna", authors: "E.H. Porter; N. / A", keywords: "Amerikan Edebiyatı; Pollyanna; Porter, Eleanor H.; Roman", publisher: "Simge Yayıncılık", year: "2012", type: "Book" },
+            { title: "Pollyanna", authors: "E.H. Porter; N. / A", keywords: "Amerikan Edebiyatı; Pollyanna; Porter, Eleanor H.; Roman", publisher: "Parıltı Yayıncılık", year: "2012", type: "Book" },
+            { title: "Pollyanna", authors: "E.H. Porter; Ü. Tamer", keywords: "Amerikan Edebiyatı; Pollyanna; Porter, Eleanor H.; Roman", publisher: "Remzi Kitabevi", year: "2011", type: "Book" },
+            { title: "Pollyanna", authors: "E.H. Porter; N. / A", keywords: "Amerikan Edebiyatı; Pollyanna; Porter, Eleanor H.; Roman", publisher: "Berikan Yayın Evi", year: "2011", type: "Book" },
+            { title: "Pollyanna", authors: "E.H. Porter; N. / A", keywords: "Amerikan Edebiyatı; Pollyanna; Porter, Eleanor H.; Roman", publisher: "Kaya Yayınları", year: "2011", type: "Book" },
+        ];
+
+        function searchBooks() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const results = books.filter(book => 
+                book.title.toLowerCase().includes(query) || 
+                book.authors.toLowerCase().includes(query)
+            );
+            displayResults(results);
+        }
+
+        function displayResults(results) {
+            const resultsDiv = document.getElementById('searchResults');
+            resultsDiv.innerHTML = '';
+            if (results.length > 0) {
+                let table = `<table>
+                                <tr>
+                                    <th>Başlık</th>
+                                    <th>Yazarlar</th>
+                                    <th>Anahtar Kelimeler</th>
+                                    <th>Yayınevi</th>
+                                    <th>Yayın Yılı</th>
+                                    <th>Yayın Türü</th>
+                                </tr>`;
+                results.forEach(book => {
+                    table += `<tr>
+                                <td>${book.title}</td>
+                                <td>${book.authors}</td>
+                                <td>${book.keywords}</td>
+                                <td>${book.publisher}</td>
+                                <td>${book.year}</td>
+                                <td>${book.type}</td>
+                              </tr>`;
+                });
+                table += `</table>`;
+                resultsDiv.innerHTML = table;
+                resultsDiv.style.display = 'block';
+            } else {
+                resultsDiv.innerHTML = '<p>Sonuç bulunamadı.</p>';
+                resultsDiv.style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Çocuk Edebiyatı Bibliyografya</h1>
+        <nav>
+            <a href="#">Ana Sayfa</a>
+            <a href="#">Hakkında</a>
+            <a href="#">Hizmetler</a>
+            <a href="#">İletişim</a>
+        </nav>
+        <input type="text" id="searchInput" placeholder="Kitap veya yazar ara" oninput="searchBooks()" />
+    </header>
+    <main>
+        <h2>Türkçe Yazılmış ve Yabancı Dile Çevirilmiş Çocuk Edebiyatı Kitapları</h2>
+        <p>Bu sayfa, Türkçe yazılmış ve yabancı dile çevrilmiş çocuk edebiyatı kitaplarının derlemesini içermektedir.</p>
+        <div id="searchResults"></div>
+    </main>
+    <footer>
+        <p>Tüm Hakları Saklıdır &copy; 2024</p>
+    </footer>
+</body>
+</html>
